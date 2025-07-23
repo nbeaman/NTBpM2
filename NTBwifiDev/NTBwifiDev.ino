@@ -1,19 +1,17 @@
 #include <NTBwifi.h>
 
-const char* ssid = "henryb";
-const char* password = "Excell55!@";
 const char* timezone = "EST5EDT,M3.2.0,M11.1.0";
 const char* hostname = "MeshMaster";
 
 void setup() {
   Serial.begin(115200);
-  NTBwifi::begin(ssid, password, timezone, hostname);
+  NTBwifi::begin(timezone, hostname);
 }
 
 void loop() {
   NTBwifi::handle();
-
-  // ✅ Always run sensor logic regardless of Wi-Fi/NTP
+  Serial.println("do'n somthing");
+  // ✅ Sensor logic always runs
   // read sensor data here
 
   if (NTBwifi::isConnected() && NTBwifi::isTimeSynced()) {
@@ -27,5 +25,5 @@ void loop() {
     }
   }
 
-  delay(20000);
+  delay(5000);
 }
