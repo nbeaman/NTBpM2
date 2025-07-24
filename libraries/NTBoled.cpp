@@ -64,6 +64,23 @@ void NTBoled::drawWifiSymbol(bool connected) {
   }
 }
 
+void NTBoled::drawNoWifiSymbol() {
+  if (!_initialized) return;
+
+  // Clear icon space
+  _display.fillRect(0, 0, 16, 16, SSD1306_WHITE);
+
+  // Draw thick "X" for disconnection symbol
+  for (int i = 0; i < 3; i++) {
+  // Diagonal: top-left to bottom-right
+  _display.drawLine(3, 3, 12, 12, SSD1306_BLACK);
+
+  // Diagonal: bottom-left to top-right
+  _display.drawLine(3, 12, 12, 3, SSD1306_BLACK);
+  }
+}
+
+
 /*
  * NEW FUNCTION: drawChargeBar()
  * Draws a battery-style bar in the top-right corner of the display.
