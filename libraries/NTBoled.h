@@ -13,6 +13,7 @@ class NTBoled {
     void print(String message, int size, int x, int y);
     
     void drawWifiSymbol(bool connected);
+    void drawNoWifiSymbol();
     	
     /**
      * @brief Draws a battery-style charge bar in the top-right corner.
