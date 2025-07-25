@@ -14,6 +14,9 @@ class NTBoled {
     
     void drawWifiSymbol(bool connected);
     void drawNoWifiSymbol();
+    
+    bool isI2CFunctioning();
+    bool isI2CDevicePresent(uint8_t address);
     	
     /**
      * @brief Draws a battery-style charge bar in the top-right corner.
@@ -25,7 +28,7 @@ class NTBoled {
 
   private:
     Adafruit_SSD1306 _display;
-	bool _initialized = false; // Track whether OLED is available	
+		bool _initialized; 							// Track whether OLED is available	
 };
 
 #endif
