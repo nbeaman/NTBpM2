@@ -10,7 +10,7 @@ void setup() {
 
   if (!oled.begin()) {
     Serial.println(F("Failed to start OLED"));
-    while (true);
+    //while (true);
   }
   // 1. Clear the screen buffer
   oled.clear();
