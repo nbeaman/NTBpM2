@@ -1,4 +1,5 @@
 #include "NTBoled.h"
+#include <Wire.h>
 
 // Define common screen properties
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
@@ -12,21 +13,39 @@
 NTBoled::NTBoled() : _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET) {
 }
 
+bool NTBoled::isI2CDevicePresent(uint8_t address) {
+  Wire.beginTransmission(address);
+  return Wire.endTransmission() == 0;
+}
+
+bool NTBoled::isI2CFunctioning(){
+	
+  if (!_display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+		Serial.println(String("nope"));
+    return false;
+  }else {
+  	Serial.println(String("yes"));
+  	return true;
+	}	
+	
+}
+	
 /*
  * begin()
  */
 bool NTBoled::begin() {
-  if (!_display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-	_initialized = false;
-	Serial.println(String("nope"));
-    return false;
-  }
-  _initialized = true;
-  _display.clearDisplay();
-  _display.setTextColor(SSD1306_WHITE);
-  _display.display();
-  Serial.println(String("good"));
-  return true;
+	Wire.begin(); // Default SDA = GPIO21, SCL = GPIO22
+	if(isI2CDevicePresent(SCREEN_ADDRESS)){
+		isI2CFunctioning();
+		Serial.println("YES ");
+		_initialized = true;
+		return true;
+	} else {
+		Serial.println("NO ");
+		_initialized = false;
+		return false;
+	}
+	
 }
 
 /*
