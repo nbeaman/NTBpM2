@@ -47,11 +47,12 @@ void loop() {
   oled.clear();
   if (NTBwifi::isConnected()){
     oled.drawWifiSymbol(true);     // Show full Wi-Fi strength
+    oled.print(String(NTBwifi::localIP()),1,13,8);
   } else {
     oled.drawNoWifiSymbol();       // Show crossed-out Wi-Fi icon
   }
   oled.show();
 
 
-  delay(5000);        //setting this to 10000 makes it so that OTA will not work
+  delay(4000);        //setting this to 10000 makes it so that OTA will not work
 }
